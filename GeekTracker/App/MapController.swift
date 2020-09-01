@@ -7,24 +7,25 @@
 //
 
 import UIKit
+import GoogleMaps
+import CoreLocation
 
-class MapController: UIViewController {
+class MapController: UIViewController, GMSMapViewDelegate {
+    let coordinate = CLLocationCoordinate2D(latitude: 52.287521, longitude: 104.287223)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        configureMap()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func configureMap() {
+        let camera = GMSCameraPosition.camera(withTarget: coordinate, zoom: 12)
+        let mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
+        mapView.mapType = .hybrid
+        mapView.delegate = self
+        self.view.addSubview(mapView)
+        //mapView.settings.myLocationButton = true
     }
-    */
 
 }
