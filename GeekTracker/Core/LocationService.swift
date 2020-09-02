@@ -38,7 +38,6 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
         case .denied, .restricted:
-            //print("Location access not allowed, please allow access in Privacy Settings")
             let alert = UIAlertController(title: "Location access not allowed", message: "Please allow access in Privacy Settings", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(okAction)

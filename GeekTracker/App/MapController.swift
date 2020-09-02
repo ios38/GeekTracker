@@ -8,7 +8,6 @@
 
 import UIKit
 import GoogleMaps
-//import CoreLocation
 
 class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate {
     var mapView: GMSMapView?
@@ -56,7 +55,6 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
 
     @objc func didUpdateLocation(_ notification: NSNotification) {
         guard let location = notification.userInfo?["location"] as? CLLocation else { return }
-        //print("Location has been updated to \(location.coordinate)")
         let cameraPosition = GMSCameraPosition(target: location.coordinate, zoom: 17)
         self.mapView!.animate(to: cameraPosition)
         
