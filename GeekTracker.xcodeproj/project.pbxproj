@@ -13,6 +13,7 @@
 		5099522724FDF714009B6BC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5099522624FDF714009B6BC0 /* Assets.xcassets */; };
 		5099522A24FDF714009B6BC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5099522824FDF714009B6BC0 /* LaunchScreen.storyboard */; };
 		5099523624FDF926009B6BC0 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5099523524FDF926009B6BC0 /* MapController.swift */; };
+		5099523824FF4D79009B6BC0 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5099523724FF4D79009B6BC0 /* LocationService.swift */; };
 		D23D23CD2FAAACC1515E4A46 /* Pods_GeekTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8161E5E51F3A71D59FEF2617 /* Pods_GeekTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		5099522924FDF714009B6BC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5099522B24FDF714009B6BC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5099523524FDF926009B6BC0 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
+		5099523724FF4D79009B6BC0 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		8161E5E51F3A71D59FEF2617 /* Pods_GeekTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GeekTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6B856B4968AD1373FB5850 /* Pods-GeekTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeekTracker.release.xcconfig"; path = "Target Support Files/Pods-GeekTracker/Pods-GeekTracker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +96,7 @@
 		5099523224FDF7C0009B6BC0 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				5099523724FF4D79009B6BC0 /* LocationService.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5099523824FF4D79009B6BC0 /* LocationService.swift in Sources */,
 				5099523624FDF926009B6BC0 /* MapController.swift in Sources */,
 				5099521E24FDF711009B6BC0 /* AppDelegate.swift in Sources */,
 				5099522024FDF711009B6BC0 /* SceneDelegate.swift in Sources */,

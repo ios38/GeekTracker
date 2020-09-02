@@ -8,20 +8,17 @@
 
 import UIKit
 import GoogleMaps
-import CoreLocation
+//import CoreLocation
 
 class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate {
     var mapView: GMSMapView?
     let coordinate = CLLocationCoordinate2D(latitude: 52.287521, longitude: 104.287223)
-    var locationManager: CLLocationManager?
-    var updateLocationBlock: () -> () = { }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureMap()
-        configureLocationManager()
-        configureNavigationBar()
+        addStartTrackingButton()
     }
     
     func configureMap() {
@@ -34,54 +31,36 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         //mapView.settings.myLocationButton = true
     }
     
-    func configureNavigationBar() {
-        let trackButton = UIBarButtonItem(title: "Track", style: .plain, target: self, action: #selector(trackLocation))
-        navigationItem.leftBarButtonItem = trackButton
+    func addStartTrackingButton() {
+        let button = UIBarButtonItem(title: "Start tracking", style: .plain, target: self, action: #selector(startTrackButtonAction))
+        navigationItem.leftBarButtonItem = button
     }
 
-    func configureLocationManager() {
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
+    func addStopTrackingButton() {
+        let button = UIBarButtonItem(title: "Stop tracking", style: .plain, target: self, action: #selector(stopTrackButtonAction))
+        navigationItem.leftBarButtonItem = button
     }
 
-    @objc func trackLocation() {
-        let status = CLLocationManager.authorizationStatus()
-        
-        updateLocationBlock = {
-            self.locationManager?.startUpdatingLocation()
-        }
-
-        switch status {
-        case .notDetermined:
-            locationManager?.requestWhenInUseAuthorization()
-        case .denied, .restricted:
-            let alert = UIAlertController(title: "Location access not allowed", message: "Please allow access in Privacy Settings", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(okAction)
-            present(alert, animated: true, completion: nil)
-        case .authorizedAlways, .authorizedWhenInUse:
-            updateLocationBlock()
-        @unknown default:
-            return
-        }
-        
+    @objc func startTrackButtonAction() {
+        LocationService.shared.startTracking()
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateLocation(_:)), name: Notification.Name("LocationServiceDidUpdateCurrentLocation"), object: nil)
+        mapView?.clear()
+        addStopTrackingButton()
     }
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if (status == .authorizedAlways || status == .authorizedWhenInUse) {
-            updateLocationBlock()
-        }
+    @objc func stopTrackButtonAction() {
+        LocationService.shared.stopTracking()
+        NotificationCenter.default.removeObserver(self)
+        addStartTrackingButton()
     }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let newCoordinate = locations.first?.coordinate else { return }
-        
-        let cameraPosition = GMSCameraPosition(target: newCoordinate, zoom: 17)
+
+    @objc func didUpdateLocation(_ notification: NSNotification) {
+        guard let location = notification.userInfo?["location"] as? CLLocation else { return }
+        //print("Location has been updated to \(location.coordinate)")
+        let cameraPosition = GMSCameraPosition(target: location.coordinate, zoom: 17)
         self.mapView!.animate(to: cameraPosition)
         
-        let marker = GMSMarker(position: newCoordinate)
+        let marker = GMSMarker(position: location.coordinate)
         marker.map = mapView
-        
     }
-    
 }
