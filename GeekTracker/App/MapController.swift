@@ -12,7 +12,9 @@ import GoogleMaps
 class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate {
     var mapView: GMSMapView?
     let coordinate = CLLocationCoordinate2D(latitude: 52.287521, longitude: 104.287223)
-    
+    var route: GMSPolyline?
+    var routePath: GMSMutablePath?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,9 +43,16 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
     }
 
     @objc func startTrackButtonAction() {
+        route?.map = nil
+        route = GMSPolyline()
+        routePath = GMSMutablePath()
+        route?.strokeColor = .yellow
+        route?.strokeWidth = 3
+        route?.map = mapView
+
         LocationService.shared.startTracking()
         NotificationCenter.default.addObserver(self, selector: #selector(didUpdateLocation(_:)), name: Notification.Name("LocationServiceDidUpdateCurrentLocation"), object: nil)
-        mapView?.clear()
+        //mapView?.clear()
         addStopTrackingButton()
     }
     
@@ -55,10 +64,13 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
 
     @objc func didUpdateLocation(_ notification: NSNotification) {
         guard let location = notification.userInfo?["location"] as? CLLocation else { return }
-        let cameraPosition = GMSCameraPosition(target: location.coordinate, zoom: 17)
+        let cameraPosition = GMSCameraPosition(target: location.coordinate, zoom: 15)
         self.mapView!.animate(to: cameraPosition)
         
-        let marker = GMSMarker(position: location.coordinate)
-        marker.map = mapView
+        //let marker = GMSMarker(position: location.coordinate)
+        //marker.map = mapView
+        routePath?.add(location.coordinate)
+        route?.path = routePath
+
     }
 }
