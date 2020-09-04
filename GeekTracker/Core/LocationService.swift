@@ -49,7 +49,7 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         case .authorizedAlways, .authorizedWhenInUse:
             //locationManager.startUpdatingLocation()
             updateLocationBlock()
-            print("LocationService started updating location")
+            //print("LocationService started updating location")
         @unknown default:
             return
         }
@@ -58,14 +58,14 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     
     func stopTracking() {
         self.locationManager.stopUpdatingLocation()
-        print("LocationService stopped updating location")
+        //print("LocationService stopped updating location")
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if (status == .authorizedAlways || status == .authorizedWhenInUse) {
             //locationManager.startUpdatingLocation()
             updateLocationBlock()
-            print("didChangeAuthorization: LocationService started updating location")
+            //print("didChangeAuthorization: LocationService started updating location")
         }
     }
     

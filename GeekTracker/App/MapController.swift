@@ -16,7 +16,6 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
     var route: GMSPolyline?
     var routePath: GMSMutablePath?
     var track = List<RealmLocation>()
-    //private lazy var tracks: Results<RealmTrack> = try! RealmService.get(RealmTrack.self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +36,7 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
     }
     
     func addLoadLastTrackButton() {
-        let button = UIBarButtonItem(title: "Last Track", style: .plain, target: self, action: #selector(loadLastTrackButtonAction))
+        let button = UIBarButtonItem(title: "Saved Tracks", style: .plain, target: self, action: #selector(savedTracksButtonAction))
         navigationItem.rightBarButtonItem = button
     }
 
@@ -49,6 +48,25 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
     func addStopTrackingButton() {
         let button = UIBarButtonItem(title: "Stop tracking", style: .plain, target: self, action: #selector(stopTrackButtonAction))
         navigationItem.leftBarButtonItem = button
+    }
+    
+    func viewSavedTrack(track: RealmTrack) {
+        //print("Selected track \(track)")
+        route?.map = nil
+        route = GMSPolyline()
+        routePath = GMSMutablePath()
+        route?.strokeColor = .yellow
+        route?.strokeWidth = 3
+        route?.map = mapView
+
+        track.track.forEach { realmLocation in
+            //print(realmLocation.coordinate)
+            let cameraPosition = GMSCameraPosition(target: realmLocation.coordinate, zoom: 15)
+            self.mapView!.animate(to: cameraPosition)
+            
+            routePath?.add(realmLocation.coordinate)
+            route?.path = routePath
+        }
     }
 
     @objc func startTrackButtonAction() {
@@ -92,28 +110,14 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         track.append(realmLocation)
     }
     
-    @objc func loadLastTrackButtonAction() {
+    @objc func savedTracksButtonAction() {
         LocationService.shared.stopTracking()
         NotificationCenter.default.removeObserver(self)
+        addStartTrackingButton()
 
-        let tracks: Results<RealmTrack> = try! RealmService.get(RealmTrack.self)
-        guard let track = tracks.last else { return }
-        //print("Last track Date: \(track.date)")
-        
-        route?.map = nil
-        route = GMSPolyline()
-        routePath = GMSMutablePath()
-        route?.strokeColor = .yellow
-        route?.strokeWidth = 3
-        route?.map = mapView
-
-        track.track.forEach { realmLocation in
-            //print(realmLocation.coordinate)
-            let cameraPosition = GMSCameraPosition(target: realmLocation.coordinate, zoom: 15)
-            self.mapView!.animate(to: cameraPosition)
-            
-            routePath?.add(realmLocation.coordinate)
-            route?.path = routePath
-        }
+        let tracksController = TracksController()
+        tracksController.navigationItem.title = "Saved Tracks"
+        self.navigationController?.pushViewController(tracksController, animated: true)
     }
+    
 }
