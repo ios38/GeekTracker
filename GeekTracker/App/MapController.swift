@@ -52,7 +52,6 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
 
         LocationService.shared.startTracking()
         NotificationCenter.default.addObserver(self, selector: #selector(didUpdateLocation(_:)), name: Notification.Name("LocationServiceDidUpdateCurrentLocation"), object: nil)
-        //mapView?.clear()
         addStopTrackingButton()
     }
     
@@ -66,9 +65,7 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         guard let location = notification.userInfo?["location"] as? CLLocation else { return }
         let cameraPosition = GMSCameraPosition(target: location.coordinate, zoom: 15)
         self.mapView!.animate(to: cameraPosition)
-        
-        //let marker = GMSMarker(position: location.coordinate)
-        //marker.map = mapView
+
         routePath?.add(location.coordinate)
         route?.path = routePath
 

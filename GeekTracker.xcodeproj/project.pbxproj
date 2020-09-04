@@ -138,6 +138,7 @@
 				5099521724FDF711009B6BC0 /* Frameworks */,
 				5099521824FDF711009B6BC0 /* Resources */,
 				F85BD9AA339D736861E2EB4D /* [CP] Copy Pods Resources */,
+				27DF9BD5982E3DF2F98C50CF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -195,6 +196,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		27DF9BD5982E3DF2F98C50CF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GeekTracker/Pods-GeekTracker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GeekTracker/Pods-GeekTracker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GeekTracker/Pods-GeekTracker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F686F11AA91B17DB2678A36A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
