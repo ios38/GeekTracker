@@ -65,7 +65,7 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         if (status == .authorizedAlways || status == .authorizedWhenInUse) {
             //locationManager.startUpdatingLocation()
             updateLocationBlock()
-            print("LocationService started updating location")
+            print("didChangeAuthorization: LocationService started updating location")
         }
     }
     

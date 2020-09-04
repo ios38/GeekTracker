@@ -8,18 +8,22 @@
 
 import UIKit
 import GoogleMaps
+import RealmSwift
 
 class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate {
     var mapView: GMSMapView?
     let coordinate = CLLocationCoordinate2D(latitude: 52.287521, longitude: 104.287223)
     var route: GMSPolyline?
     var routePath: GMSMutablePath?
-
+    var track = List<RealmLocation>()
+    //private lazy var tracks: Results<RealmTrack> = try! RealmService.get(RealmTrack.self)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureMap()
         addStartTrackingButton()
+        addLoadLastTrackButton()
     }
     
     func configureMap() {
@@ -32,6 +36,11 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         //mapView.settings.myLocationButton = true
     }
     
+    func addLoadLastTrackButton() {
+        let button = UIBarButtonItem(title: "Last Track", style: .plain, target: self, action: #selector(loadLastTrackButtonAction))
+        navigationItem.rightBarButtonItem = button
+    }
+
     func addStartTrackingButton() {
         let button = UIBarButtonItem(title: "Start tracking", style: .plain, target: self, action: #selector(startTrackButtonAction))
         navigationItem.leftBarButtonItem = button
@@ -49,6 +58,8 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         route?.strokeColor = .yellow
         route?.strokeWidth = 3
         route?.map = mapView
+        
+        track = List<RealmLocation>()
 
         LocationService.shared.startTracking()
         NotificationCenter.default.addObserver(self, selector: #selector(didUpdateLocation(_:)), name: Notification.Name("LocationServiceDidUpdateCurrentLocation"), object: nil)
@@ -58,6 +69,12 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
     @objc func stopTrackButtonAction() {
         LocationService.shared.stopTracking()
         NotificationCenter.default.removeObserver(self)
+        
+        let realmTrack = RealmTrack()
+        realmTrack.date = "\(Date())"
+        realmTrack.track = track
+        try? RealmService.save(item: realmTrack)
+        
         addStartTrackingButton()
     }
 
@@ -68,6 +85,35 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
 
         routePath?.add(location.coordinate)
         route?.path = routePath
+        
+        let realmLocation = RealmLocation()
+        realmLocation.latitude = Double(location.coordinate.latitude)
+        realmLocation.longitude = Double(location.coordinate.longitude)
+        track.append(realmLocation)
+    }
+    
+    @objc func loadLastTrackButtonAction() {
+        LocationService.shared.stopTracking()
+        NotificationCenter.default.removeObserver(self)
 
+        let tracks: Results<RealmTrack> = try! RealmService.get(RealmTrack.self)
+        guard let track = tracks.last else { return }
+        //print("Last track Date: \(track.date)")
+        
+        route?.map = nil
+        route = GMSPolyline()
+        routePath = GMSMutablePath()
+        route?.strokeColor = .yellow
+        route?.strokeWidth = 3
+        route?.map = mapView
+
+        track.track.forEach { realmLocation in
+            //print(realmLocation.coordinate)
+            let cameraPosition = GMSCameraPosition(target: realmLocation.coordinate, zoom: 15)
+            self.mapView!.animate(to: cameraPosition)
+            
+            routePath?.add(realmLocation.coordinate)
+            route?.path = routePath
+        }
     }
 }

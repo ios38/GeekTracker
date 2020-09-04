@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         GMSServices.provideAPIKey("AIzaSyDPPBnJU8Srt0nlLb3_N64zpekpGcZAhsg")
         
+        print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
+                
         return true
     }
 
