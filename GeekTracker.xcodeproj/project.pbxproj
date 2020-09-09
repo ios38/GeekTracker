@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5018F9D12508A871009F9979 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5018F9CF2508A871009F9979 /* LoginView.swift */; };
+		5018F9D22508A871009F9979 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5018F9D02508A871009F9979 /* LoginController.swift */; };
+		5018F9D72508A8AE009F9979 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5018F9D42508A8AD009F9979 /* ApplicationCoordinator.swift */; };
+		5018F9D82508A8AE009F9979 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5018F9D52508A8AE009F9979 /* BaseCoordinator.swift */; };
+		5018F9D92508A8AE009F9979 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5018F9D62508A8AE009F9979 /* LoginCoordinator.swift */; };
 		507D916D2502504C003B03DC /* TracksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507D916C2502504C003B03DC /* TracksController.swift */; };
 		5099521E24FDF711009B6BC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5099521D24FDF711009B6BC0 /* AppDelegate.swift */; };
 		5099522024FDF711009B6BC0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5099521F24FDF711009B6BC0 /* SceneDelegate.swift */; };
@@ -22,6 +27,11 @@
 
 /* Begin PBXFileReference section */
 		2F571361F42D979B759112A6 /* Pods-GeekTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeekTracker.debug.xcconfig"; path = "Target Support Files/Pods-GeekTracker/Pods-GeekTracker.debug.xcconfig"; sourceTree = "<group>"; };
+		5018F9CF2508A871009F9979 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		5018F9D02508A871009F9979 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		5018F9D42508A8AD009F9979 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
+		5018F9D52508A8AE009F9979 /* BaseCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		5018F9D62508A8AE009F9979 /* LoginCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		507D916C2502504C003B03DC /* TracksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksController.swift; sourceTree = "<group>"; };
 		5099521A24FDF711009B6BC0 /* GeekTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeekTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5099521D24FDF711009B6BC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +69,35 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		5018F9CD2508A7F9009F9979 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				5018F9CE2508A871009F9979 /* Login */,
+				5099523524FDF926009B6BC0 /* MapController.swift */,
+				507D916C2502504C003B03DC /* TracksController.swift */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		5018F9CE2508A871009F9979 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				5018F9CF2508A871009F9979 /* LoginView.swift */,
+				5018F9D02508A871009F9979 /* LoginController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		5018F9D32508A891009F9979 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				5018F9D52508A8AE009F9979 /* BaseCoordinator.swift */,
+				5018F9D42508A8AD009F9979 /* ApplicationCoordinator.swift */,
+				5018F9D62508A8AE009F9979 /* LoginCoordinator.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		5099521124FDF711009B6BC0 = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +121,7 @@
 			children = (
 				5099523124FDF7B6009B6BC0 /* App */,
 				5099523224FDF7C0009B6BC0 /* Core */,
+				5018F9D32508A891009F9979 /* Navigation */,
 				5099523324FDF7D7009B6BC0 /* Resources */,
 				5099523424FDF880009B6BC0 /* Environments */,
 				5099522B24FDF714009B6BC0 /* Info.plist */,
@@ -92,11 +132,10 @@
 		5099523124FDF7B6009B6BC0 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				5018F9CD2508A7F9009F9979 /* Flows */,
 				50ADF1AC2501EE950081BC05 /* Entity */,
 				5099521D24FDF711009B6BC0 /* AppDelegate.swift */,
 				5099521F24FDF711009B6BC0 /* SceneDelegate.swift */,
-				5099523524FDF926009B6BC0 /* MapController.swift */,
-				507D916C2502504C003B03DC /* TracksController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -280,8 +319,13 @@
 				5099523824FF4D79009B6BC0 /* LocationService.swift in Sources */,
 				50ADF1AE2501EF6C0081BC05 /* RealmTrack.swift in Sources */,
 				5099523624FDF926009B6BC0 /* MapController.swift in Sources */,
+				5018F9D22508A871009F9979 /* LoginController.swift in Sources */,
+				5018F9D72508A8AE009F9979 /* ApplicationCoordinator.swift in Sources */,
+				5018F9D92508A8AE009F9979 /* LoginCoordinator.swift in Sources */,
 				5099521E24FDF711009B6BC0 /* AppDelegate.swift in Sources */,
 				5099522024FDF711009B6BC0 /* SceneDelegate.swift in Sources */,
+				5018F9D12508A871009F9979 /* LoginView.swift in Sources */,
+				5018F9D82508A8AE009F9979 /* BaseCoordinator.swift in Sources */,
 				50ADF1AB2501EAE30081BC05 /* RealmService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
