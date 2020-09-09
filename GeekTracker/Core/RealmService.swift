@@ -23,7 +23,7 @@ class RealmService {
         }
     }*/
     
-    static func save<T: Object>(item: T,
+    static func save<T: Object>(_ item: T,
         configuration: Realm.Configuration = deleteIfMigration,
         update: Realm.UpdatePolicy = .modified) throws {
         let realm = try Realm(configuration: configuration)

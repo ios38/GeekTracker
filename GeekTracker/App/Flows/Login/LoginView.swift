@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 class LoginView: UIView {
-    let logoLabel = UILabel()
+    let titleLabel = UILabel()
     let loginLabel = UILabel()
     var loginTextField = UITextField()
     let passwordLabel = UILabel()
@@ -29,11 +29,11 @@ class LoginView: UIView {
     }
     
     func configureSubviews() {
-        self.logoLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.logoLabel.text = "GeekTracker"
-        self.logoLabel.font = .systemFont(ofSize: 24)
-        self.logoLabel.textColor = .lightGray
-        self.addSubview(self.logoLabel)
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.titleLabel.text = ""
+        //self.logoLabel.font = .systemFont(ofSize: 24)
+        self.titleLabel.textColor = .lightGray
+        self.addSubview(self.titleLabel)
 
         self.loginLabel.translatesAutoresizingMaskIntoConstraints = false
         self.loginLabel.text = "Login"
@@ -72,13 +72,14 @@ class LoginView: UIView {
     }
     
     func setupConstraints() {
-        logoLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(90)
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(100)
+            make.height.equalTo(50)
             make.centerX.equalToSuperview()
         }
 
         loginLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.logoLabel.snp.bottom).offset(40)
+            make.top.equalTo(self.titleLabel.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
 

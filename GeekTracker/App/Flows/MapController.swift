@@ -91,7 +91,7 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         let realmTrack = RealmTrack()
         realmTrack.date = "\(Date())"
         realmTrack.track = track
-        try? RealmService.save(item: realmTrack)
+        try? RealmService.save(realmTrack)
         
         addStartTrackingButton()
     }
