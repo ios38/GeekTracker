@@ -7,45 +7,24 @@
 //
 
 import UIKit
-import RealmSwift
 
-class TracksController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var tableView = UITableView()
-    private lazy var tracks: Results<RealmTrack> = try! RealmService.get(RealmTrack.self)
-
-    override func loadView() {
-        super.loadView()
-        self.view = tableView
-    }
+class TracksController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.dataSource = self
-        tableView.delegate = self
+        // Do any additional setup after loading the view.
     }
     
-    //MARK: - UITableViewDataSource
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tracks.count
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "TrackCell")
-        cell.textLabel?.text = tracks[indexPath.row].date
-        return cell
-    }
-    
-    //MARK: - UITableViewDelegate
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let index = navigationController?.viewControllers.firstIndex(of: self),
-              let mapController = navigationController?.viewControllers[index - 1] as? MapController
-              else { return }
-        self.navigationController?.popViewController(animated: true)
-        let track = tracks[indexPath.row]
-        mapController.viewSavedTrack(track: track)
-    }
+    */
 
 }

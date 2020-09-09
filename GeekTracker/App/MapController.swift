@@ -10,13 +10,18 @@ import UIKit
 import GoogleMaps
 import RealmSwift
 
+protocol MapControllerDelegate: class {
+  func toSavedTracks()
+}
+
 class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate {
     var mapView: GMSMapView?
     let coordinate = CLLocationCoordinate2D(latitude: 52.287521, longitude: 104.287223)
     var route: GMSPolyline?
     var routePath: GMSMutablePath?
     var track = List<RealmLocation>()
-    
+    weak var delegate: MapControllerDelegate?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,8 +55,7 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         navigationItem.leftBarButtonItem = button
     }
     
-    func viewSavedTrack(track: RealmTrack) {
-        //print("Selected track \(track)")
+    func viewTrack(_ track: RealmTrack) {
         route?.map = nil
         route = GMSPolyline()
         routePath = GMSMutablePath()
@@ -115,9 +119,11 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         NotificationCenter.default.removeObserver(self)
         addStartTrackingButton()
 
-        let tracksController = TracksController()
-        tracksController.navigationItem.title = "Saved Tracks"
-        self.navigationController?.pushViewController(tracksController, animated: true)
+        //let tracksController = TracksController()
+        //tracksController.navigationItem.title = "Saved Tracks"
+        //self.navigationController?.pushViewController(tracksController, animated: true)
+        
+        delegate?.toSavedTracks()
     }
     
 }
