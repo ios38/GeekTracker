@@ -45,9 +45,6 @@ class TracksController: UIViewController, UITableViewDataSource, UITableViewDele
     //MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //guard let index = navigationController?.viewControllers.firstIndex(of: self),
-        //      let mapController = navigationController?.viewControllers[index - 1] as? MapController
-        //      else { return }
         self.navigationController?.popViewController(animated: true)
         let track = tracks[indexPath.row]
         delegate?.tracksControllerDidSelectTrack(track)
