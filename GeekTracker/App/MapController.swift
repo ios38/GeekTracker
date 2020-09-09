@@ -50,7 +50,7 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         navigationItem.leftBarButtonItem = button
     }
     
-    func viewSavedTrack(track: RealmTrack) {
+    func viewTrack(_ track: RealmTrack) {
         //print("Selected track \(track)")
         route?.map = nil
         route = GMSPolyline()
@@ -116,8 +116,19 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         addStartTrackingButton()
 
         let tracksController = TracksController()
+        tracksController.delegate = self
         tracksController.navigationItem.title = "Saved Tracks"
         self.navigationController?.pushViewController(tracksController, animated: true)
     }
     
+}
+
+// MARK: - TracksControllerDelegate
+
+extension MapController: TracksControllerDelegate {
+    func tracksControllerDidSelectTrack(_ selectedTrack: RealmTrack) {
+        //print("selectedTrack: \(selectedTrack.date)")
+        viewTrack(selectedTrack)
+
+    }
 }

@@ -9,8 +9,13 @@
 import UIKit
 import RealmSwift
 
+protocol TracksControllerDelegate: class {
+  func tracksControllerDidSelectTrack(_ selectedTrack: RealmTrack)
+}
+
 class TracksController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var tableView = UITableView()
+    weak var delegate: TracksControllerDelegate?
     private lazy var tracks: Results<RealmTrack> = try! RealmService.get(RealmTrack.self)
 
     override func loadView() {
@@ -40,12 +45,12 @@ class TracksController: UIViewController, UITableViewDataSource, UITableViewDele
     //MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let index = navigationController?.viewControllers.firstIndex(of: self),
-              let mapController = navigationController?.viewControllers[index - 1] as? MapController
-              else { return }
+        //guard let index = navigationController?.viewControllers.firstIndex(of: self),
+        //      let mapController = navigationController?.viewControllers[index - 1] as? MapController
+        //      else { return }
         self.navigationController?.popViewController(animated: true)
         let track = tracks[indexPath.row]
-        mapController.viewSavedTrack(track: track)
+        delegate?.tracksControllerDidSelectTrack(track)
     }
 
 }
