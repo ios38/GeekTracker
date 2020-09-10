@@ -55,8 +55,6 @@ final class LoginController: UIViewController {
     }
     
     @objc func registerButtonAction() {
-        
-        /*
         guard let login = self.loginView.loginTextField.text, login != "",
               let password = self.loginView.passwordTextField.text, password != ""
               else {
@@ -69,7 +67,6 @@ final class LoginController: UIViewController {
         realmUser.password = password
         try? RealmService.save(realmUser)
         onMap?()
-        */
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {

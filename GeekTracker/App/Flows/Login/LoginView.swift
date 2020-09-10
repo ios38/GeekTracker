@@ -20,8 +20,8 @@ class LoginView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.configureSubviews()
-        self.setupConstraints()
+        configureSubviews()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -29,45 +29,52 @@ class LoginView: UIView {
     }
     
     func configureSubviews() {
-        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.titleLabel.text = ""
-        //self.logoLabel.font = .systemFont(ofSize: 24)
-        self.titleLabel.textColor = .lightGray
-        self.addSubview(self.titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.text = ""
+        titleLabel.textColor = .lightGray
+        self.addSubview(titleLabel)
 
-        self.loginLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.loginLabel.text = "Login"
-        self.loginLabel.textColor = .lightGray
-        self.addSubview(self.loginLabel)
+        loginLabel.translatesAutoresizingMaskIntoConstraints = false
+        loginLabel.text = "Login"
+        loginLabel.textColor = .lightGray
+        self.addSubview(loginLabel)
         
-        self.loginTextField.translatesAutoresizingMaskIntoConstraints = false
-        self.loginTextField.borderStyle = .roundedRect
-        self.loginTextField.placeholder = "Login"
-        self.loginTextField.accessibilityIdentifier = "userLoginTextField"
-        self.addSubview(self.loginTextField)
+        loginTextField.translatesAutoresizingMaskIntoConstraints = false
+        loginTextField.borderStyle = .roundedRect
+        loginTextField.autocapitalizationType = .none
+        loginTextField.autocorrectionType = .no
+        loginTextField.textContentType = .username
+        loginTextField.spellCheckingType = .no
+        loginTextField.placeholder = "Login"
+        loginTextField.accessibilityIdentifier = "userLoginTextField"
+        self.addSubview(loginTextField)
         
-        self.passwordLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.passwordLabel.text = "Password"
-        self.passwordLabel.textColor = .lightGray
-        self.addSubview(self.passwordLabel)
+        passwordLabel.translatesAutoresizingMaskIntoConstraints = false
+        passwordLabel.text = "Password"
+        passwordLabel.textColor = .lightGray
+        self.addSubview(passwordLabel)
         
-        self.passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        self.passwordTextField.isSecureTextEntry = true
-        self.passwordTextField.borderStyle = .roundedRect
-        self.passwordTextField.placeholder = "Password"
-        self.passwordTextField.accessibilityIdentifier = "userPasswordTextField"
-        self.addSubview(self.passwordTextField)
+        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.autocapitalizationType = .none
+        passwordTextField.autocorrectionType = .no
+        passwordTextField.textContentType = .password
+        passwordTextField.spellCheckingType = .no
+        passwordTextField.borderStyle = .roundedRect
+        passwordTextField.placeholder = "Password"
+        passwordTextField.accessibilityIdentifier = "userPasswordTextField"
+        self.addSubview(passwordTextField)
         
-        self.loginButton.translatesAutoresizingMaskIntoConstraints = false
-        self.loginButton.setTitle("Login", for: .normal)
-        self.loginButton.setTitleColor(.systemBlue, for: .normal)
-        self.loginButton.accessibilityIdentifier = "userLoginButton"
-        self.addSubview(self.loginButton)
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        loginButton.setTitle("Login", for: .normal)
+        loginButton.setTitleColor(.systemBlue, for: .normal)
+        loginButton.accessibilityIdentifier = "userLoginButton"
+        self.addSubview(loginButton)
         
-        self.registerButton.translatesAutoresizingMaskIntoConstraints = false
-        self.registerButton.setTitle("Register", for: .normal)
-        self.registerButton.setTitleColor(.systemBlue, for: .normal)
-        self.addSubview(self.registerButton)
+        registerButton.translatesAutoresizingMaskIntoConstraints = false
+        registerButton.setTitle("Register", for: .normal)
+        registerButton.setTitleColor(.systemBlue, for: .normal)
+        self.addSubview(registerButton)
 
     }
     
