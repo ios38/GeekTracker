@@ -11,6 +11,7 @@ import RealmSwift
 
 final class LoginController: UIViewController {
     var loginView = LoginView()
+    var safeView = SafeView()
     var onMap: (() -> Void)?
     let loginError = "Login/password error!"
 
@@ -30,6 +31,9 @@ final class LoginController: UIViewController {
         loginView.loginTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         loginView.registerButton.addTarget(self, action: #selector(registerButtonAction), for: .touchUpInside)
         loginView.passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(enterBackground), name: Notification.Name("enterBackground"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(enterForeground), name: Notification.Name("enterForeground"), object: nil)
     }
     
     @objc func loginButtonAction() {
@@ -51,6 +55,8 @@ final class LoginController: UIViewController {
     }
     
     @objc func registerButtonAction() {
+        
+        /*
         guard let login = self.loginView.loginTextField.text, login != "",
               let password = self.loginView.passwordTextField.text, password != ""
               else {
@@ -63,9 +69,19 @@ final class LoginController: UIViewController {
         realmUser.password = password
         try? RealmService.save(realmUser)
         onMap?()
+        */
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         loginView.titleLabel.text = ""
     }
+    
+    @objc func enterBackground() {
+        self.view = safeView
+    }
+    
+    @objc func enterForeground() {
+        self.view = loginView
+    }
+
 }
