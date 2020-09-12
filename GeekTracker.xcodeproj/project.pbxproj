@@ -10,9 +10,8 @@
 		50061355250A0C060077AC97 /* SafeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50061354250A0C060077AC97 /* SafeView.swift */; };
 		5018F9D12508A871009F9979 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5018F9CF2508A871009F9979 /* LoginView.swift */; };
 		5018F9D22508A871009F9979 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5018F9D02508A871009F9979 /* LoginController.swift */; };
-		5018F9D72508A8AE009F9979 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5018F9D42508A8AD009F9979 /* ApplicationCoordinator.swift */; };
-		5018F9D82508A8AE009F9979 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5018F9D52508A8AE009F9979 /* BaseCoordinator.swift */; };
-		5018F9D92508A8AE009F9979 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5018F9D62508A8AE009F9979 /* LoginCoordinator.swift */; };
+		5018F9D72508A8AE009F9979 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5018F9D42508A8AD009F9979 /* AppCoordinator.swift */; };
+		5018F9D82508A8AE009F9979 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5018F9D52508A8AE009F9979 /* Coordinator.swift */; };
 		5018F9DB2508C0F7009F9979 /* RealmUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5018F9DA2508C0F7009F9979 /* RealmUser.swift */; };
 		507D916D2502504C003B03DC /* TracksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507D916C2502504C003B03DC /* TracksController.swift */; };
 		5099521E24FDF711009B6BC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5099521D24FDF711009B6BC0 /* AppDelegate.swift */; };
@@ -22,6 +21,10 @@
 		5099522A24FDF714009B6BC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5099522824FDF714009B6BC0 /* LaunchScreen.storyboard */; };
 		5099523624FDF926009B6BC0 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5099523524FDF926009B6BC0 /* MapController.swift */; };
 		5099523824FF4D79009B6BC0 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5099523724FF4D79009B6BC0 /* LocationService.swift */; };
+		509C447F250C7895002AE30A /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509C447E250C7895002AE30A /* MainCoordinator.swift */; };
+		509C4481250C78A0002AE30A /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509C4480250C78A0002AE30A /* AuthCoordinator.swift */; };
+		509C4484250C7D01002AE30A /* RecoveryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509C4483250C7D01002AE30A /* RecoveryController.swift */; };
+		509C4486250C9517002AE30A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509C4485250C9517002AE30A /* MapView.swift */; };
 		50ADF1AB2501EAE30081BC05 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ADF1AA2501EAE30081BC05 /* RealmService.swift */; };
 		50ADF1AE2501EF6C0081BC05 /* RealmTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ADF1AD2501EF6C0081BC05 /* RealmTrack.swift */; };
 		D23D23CD2FAAACC1515E4A46 /* Pods_GeekTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8161E5E51F3A71D59FEF2617 /* Pods_GeekTracker.framework */; };
@@ -32,9 +35,8 @@
 		50061354250A0C060077AC97 /* SafeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeView.swift; sourceTree = "<group>"; };
 		5018F9CF2508A871009F9979 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		5018F9D02508A871009F9979 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
-		5018F9D42508A8AD009F9979 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
-		5018F9D52508A8AE009F9979 /* BaseCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
-		5018F9D62508A8AE009F9979 /* LoginCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		5018F9D42508A8AD009F9979 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		5018F9D52508A8AE009F9979 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		5018F9DA2508C0F7009F9979 /* RealmUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmUser.swift; sourceTree = "<group>"; };
 		507D916C2502504C003B03DC /* TracksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksController.swift; sourceTree = "<group>"; };
 		5099521A24FDF711009B6BC0 /* GeekTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeekTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +48,10 @@
 		5099522B24FDF714009B6BC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5099523524FDF926009B6BC0 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		5099523724FF4D79009B6BC0 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		509C447E250C7895002AE30A /* MainCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		509C4480250C78A0002AE30A /* AuthCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		509C4483250C7D01002AE30A /* RecoveryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoveryController.swift; sourceTree = "<group>"; };
+		509C4485250C9517002AE30A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		50ADF1AA2501EAE30081BC05 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		50ADF1AD2501EF6C0081BC05 /* RealmTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTrack.swift; sourceTree = "<group>"; };
 		8161E5E51F3A71D59FEF2617 /* Pods_GeekTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GeekTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,29 +82,30 @@
 		5018F9CD2508A7F9009F9979 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				5018F9CE2508A871009F9979 /* Login */,
-				5099523524FDF926009B6BC0 /* MapController.swift */,
-				507D916C2502504C003B03DC /* TracksController.swift */,
+				509C4482250C7A37002AE30A /* Map */,
+				5018F9CE2508A871009F9979 /* Auth */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
 		};
-		5018F9CE2508A871009F9979 /* Login */ = {
+		5018F9CE2508A871009F9979 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				5018F9CF2508A871009F9979 /* LoginView.swift */,
 				50061354250A0C060077AC97 /* SafeView.swift */,
 				5018F9D02508A871009F9979 /* LoginController.swift */,
+				509C4483250C7D01002AE30A /* RecoveryController.swift */,
 			);
-			path = Login;
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		5018F9D32508A891009F9979 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				5018F9D52508A8AE009F9979 /* BaseCoordinator.swift */,
-				5018F9D42508A8AD009F9979 /* ApplicationCoordinator.swift */,
-				5018F9D62508A8AE009F9979 /* LoginCoordinator.swift */,
+				5018F9D52508A8AE009F9979 /* Coordinator.swift */,
+				5018F9D42508A8AD009F9979 /* AppCoordinator.swift */,
+				509C4480250C78A0002AE30A /* AuthCoordinator.swift */,
+				509C447E250C7895002AE30A /* MainCoordinator.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -126,7 +133,6 @@
 			children = (
 				5099523124FDF7B6009B6BC0 /* App */,
 				5099523224FDF7C0009B6BC0 /* Core */,
-				5018F9D32508A891009F9979 /* Navigation */,
 				5099523324FDF7D7009B6BC0 /* Resources */,
 				5099523424FDF880009B6BC0 /* Environments */,
 				5099522B24FDF714009B6BC0 /* Info.plist */,
@@ -137,6 +143,7 @@
 		5099523124FDF7B6009B6BC0 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				5018F9D32508A891009F9979 /* Navigation */,
 				5018F9CD2508A7F9009F9979 /* Flows */,
 				50ADF1AC2501EE950081BC05 /* Entity */,
 				5099521D24FDF711009B6BC0 /* AppDelegate.swift */,
@@ -169,6 +176,16 @@
 			children = (
 			);
 			path = Environments;
+			sourceTree = "<group>";
+		};
+		509C4482250C7A37002AE30A /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				509C4485250C9517002AE30A /* MapView.swift */,
+				5099523524FDF926009B6BC0 /* MapController.swift */,
+				507D916C2502504C003B03DC /* TracksController.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		50ADF1AC2501EE950081BC05 /* Entity */ = {
@@ -326,14 +343,17 @@
 				50ADF1AE2501EF6C0081BC05 /* RealmTrack.swift in Sources */,
 				5099523624FDF926009B6BC0 /* MapController.swift in Sources */,
 				5018F9D22508A871009F9979 /* LoginController.swift in Sources */,
-				5018F9D72508A8AE009F9979 /* ApplicationCoordinator.swift in Sources */,
+				5018F9D72508A8AE009F9979 /* AppCoordinator.swift in Sources */,
+				509C4481250C78A0002AE30A /* AuthCoordinator.swift in Sources */,
 				5018F9DB2508C0F7009F9979 /* RealmUser.swift in Sources */,
-				5018F9D92508A8AE009F9979 /* LoginCoordinator.swift in Sources */,
+				509C4484250C7D01002AE30A /* RecoveryController.swift in Sources */,
+				509C4486250C9517002AE30A /* MapView.swift in Sources */,
 				5099521E24FDF711009B6BC0 /* AppDelegate.swift in Sources */,
 				5099522024FDF711009B6BC0 /* SceneDelegate.swift in Sources */,
 				5018F9D12508A871009F9979 /* LoginView.swift in Sources */,
-				5018F9D82508A8AE009F9979 /* BaseCoordinator.swift in Sources */,
+				5018F9D82508A8AE009F9979 /* Coordinator.swift in Sources */,
 				50ADF1AB2501EAE30081BC05 /* RealmService.swift in Sources */,
+				509C447F250C7895002AE30A /* MainCoordinator.swift in Sources */,
 				50061355250A0C060077AC97 /* SafeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

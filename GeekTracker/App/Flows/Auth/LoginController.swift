@@ -14,6 +14,9 @@ final class LoginController: UIViewController {
     var safeView = SafeView()
     var onMap: (() -> Void)?
     let loginError = "Login/password error!"
+    
+    var onLogin: (() -> Void)?
+    var onRecover: (() -> Void)?
 
     deinit {
         print("LoginController deinitialized")
@@ -45,7 +48,9 @@ final class LoginController: UIViewController {
         }
         let realmUser: Results<RealmUser> = try! RealmService.get(RealmUser.self).filter("login == %@", login)
         if realmUser.first?.password == password {
-            onMap?()
+            UserDefaults.standard.set(true, forKey: "isLogin")
+            onLogin?()
+
         } else {
             loginView.titleLabel.text = loginError
             loginView.loginTextField.text = ""
@@ -66,7 +71,8 @@ final class LoginController: UIViewController {
         realmUser.login = login
         realmUser.password = password
         try? RealmService.save(realmUser)
-        onMap?()
+        UserDefaults.standard.set(true, forKey: "isLogin")
+        onLogin?()
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {

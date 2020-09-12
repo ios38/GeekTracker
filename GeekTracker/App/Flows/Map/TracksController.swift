@@ -9,14 +9,18 @@
 import UIKit
 import RealmSwift
 
-protocol TracksControllerDelegate: class {
-  func tracksControllerDidSelectTrack(_ selectedTrack: RealmTrack)
-}
+//protocol TracksControllerDelegate: class {
+//  func tracksControllerDidSelectTrack(_ selectedTrack: RealmTrack)
+//}
 
 class TracksController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var tableView = UITableView()
-    weak var delegate: TracksControllerDelegate?
+    //weak var delegate: TracksControllerDelegate?
+    
     private lazy var tracks: Results<RealmTrack> = try! RealmService.get(RealmTrack.self)
+    
+    var didSelectTrack: (() -> Void)?
+    var selectedTrack: RealmTrack?
 
     override func loadView() {
         super.loadView()
@@ -46,8 +50,10 @@ class TracksController: UIViewController, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.navigationController?.popViewController(animated: true)
-        let track = tracks[indexPath.row]
-        delegate?.tracksControllerDidSelectTrack(track)
+        selectedTrack = tracks[indexPath.row]
+        //delegate?.tracksControllerDidSelectTrack(track)
+        didSelectTrack?()
+
     }
 
 }

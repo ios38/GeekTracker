@@ -8,21 +8,21 @@
 
 import UIKit
 
-class BaseCoordinator {
-    var childCoordinators: [BaseCoordinator] = []
+class Coordinator {
+    var childCoordinators: [Coordinator] = []
     
     func start() {
         // Переопределить в наследниках
     }
     
-    func addDependency(_ coordinator: BaseCoordinator) {
+    func addDependency(_ coordinator: Coordinator) {
         for element in childCoordinators where element === coordinator {
             return
         }
         childCoordinators.append(coordinator)
     }
     
-    func removeDependency(_ coordinator: BaseCoordinator?) {
+    func removeDependency(_ coordinator: Coordinator?) {
         guard
             childCoordinators.isEmpty == false,
             let coordinator = coordinator
