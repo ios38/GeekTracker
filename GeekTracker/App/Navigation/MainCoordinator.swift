@@ -21,7 +21,7 @@ final class MainCoordinator: Coordinator {
         let controller = MapController()
         
         controller.onTracks = { [weak self] in
-            self?.showTableModule()
+            self?.showTracksModule()
         }
         
         controller.onLogout = { [weak self] in
@@ -30,15 +30,14 @@ final class MainCoordinator: Coordinator {
 
         let rootController = UINavigationController(rootViewController: controller)
         setAsRoot(rootController)
-        rootController.navigationBar.isTranslucent = false
+        //rootController.navigationBar.isTranslucent = false
         self.rootController = rootController
 
     }
     
-    private func showTableModule() {
+    private func showTracksModule() {
         let controller = TracksController()
         
-        // Замыкание вызывается при выборе трека и должно запустить его просмотр и закрыть TracksController
         controller.didSelectTrack = { [weak self] in
             guard let track = controller.selectedTrack else { return }
             self?.showSelectedTrack(track)
@@ -48,7 +47,6 @@ final class MainCoordinator: Coordinator {
     }
     
     private func showSelectedTrack(_ track: RealmTrack) {
-        print("selectedTrack: \(track.date)")
         for controller in rootController!.viewControllers {
             if controller is MapController {
                 let controller = controller as! MapController

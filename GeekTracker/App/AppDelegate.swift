@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyDPPBnJU8Srt0nlLb3_N64zpekpGcZAhsg")
         
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
+        
+        UINavigationBar.appearance().backgroundColor = UIColor(white: 0, alpha: 0.95)
                 
         return true
     }

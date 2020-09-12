@@ -18,10 +18,6 @@ final class LoginController: UIViewController {
     var onLogin: (() -> Void)?
     var onRecover: (() -> Void)?
 
-    deinit {
-        print("LoginController deinitialized")
-    }
-
     override func loadView() {
         super.loadView()
         self.view = loginView
@@ -33,16 +29,21 @@ final class LoginController: UIViewController {
         loginView.loginButton.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
         loginView.loginTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         loginView.registerButton.addTarget(self, action: #selector(registerButtonAction), for: .touchUpInside)
+        loginView.recoveryButton.addTarget(self, action: #selector(recoveryButtonAction), for: .touchUpInside)
+
         loginView.passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         NotificationCenter.default.addObserver(self, selector: #selector(enterBackground), name: Notification.Name("enterBackground"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(enterForeground), name: Notification.Name("enterForeground"), object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     @objc func loginButtonAction() {
         guard let login = self.loginView.loginTextField.text, login != "",
               let password = self.loginView.passwordTextField.text, password != "" else {
-                //print("login/password data error")
                 loginView.titleLabel.text = loginError
                 return
         }
@@ -63,7 +64,6 @@ final class LoginController: UIViewController {
         guard let login = self.loginView.loginTextField.text, login != "",
               let password = self.loginView.passwordTextField.text, password != ""
               else {
-              //print("login/password data error")
               loginView.titleLabel.text = loginError
               return
         }
@@ -73,6 +73,10 @@ final class LoginController: UIViewController {
         try? RealmService.save(realmUser)
         UserDefaults.standard.set(true, forKey: "isLogin")
         onLogin?()
+    }
+    
+    @objc func recoveryButtonAction() {
+        onRecover?()
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {

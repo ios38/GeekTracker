@@ -19,6 +19,7 @@ final class AuthCoordinator: Coordinator {
     
     private func showLoginModule() {
         let controller = LoginController()
+        
         controller.onRecover = { [weak self] in
             self?.showRecoverModule()
         }

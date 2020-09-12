@@ -25,6 +25,7 @@
 		509C4481250C78A0002AE30A /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509C4480250C78A0002AE30A /* AuthCoordinator.swift */; };
 		509C4484250C7D01002AE30A /* RecoveryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509C4483250C7D01002AE30A /* RecoveryController.swift */; };
 		509C4486250C9517002AE30A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509C4485250C9517002AE30A /* MapView.swift */; };
+		509C4488250CCC55002AE30A /* RecoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509C4487250CCC55002AE30A /* RecoveryView.swift */; };
 		50ADF1AB2501EAE30081BC05 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ADF1AA2501EAE30081BC05 /* RealmService.swift */; };
 		50ADF1AE2501EF6C0081BC05 /* RealmTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ADF1AD2501EF6C0081BC05 /* RealmTrack.swift */; };
 		D23D23CD2FAAACC1515E4A46 /* Pods_GeekTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8161E5E51F3A71D59FEF2617 /* Pods_GeekTracker.framework */; };
@@ -52,6 +53,7 @@
 		509C4480250C78A0002AE30A /* AuthCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		509C4483250C7D01002AE30A /* RecoveryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoveryController.swift; sourceTree = "<group>"; };
 		509C4485250C9517002AE30A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		509C4487250CCC55002AE30A /* RecoveryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryView.swift; sourceTree = "<group>"; };
 		50ADF1AA2501EAE30081BC05 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		50ADF1AD2501EF6C0081BC05 /* RealmTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTrack.swift; sourceTree = "<group>"; };
 		8161E5E51F3A71D59FEF2617 /* Pods_GeekTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GeekTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +96,7 @@
 				5018F9CF2508A871009F9979 /* LoginView.swift */,
 				50061354250A0C060077AC97 /* SafeView.swift */,
 				5018F9D02508A871009F9979 /* LoginController.swift */,
+				509C4487250CCC55002AE30A /* RecoveryView.swift */,
 				509C4483250C7D01002AE30A /* RecoveryController.swift */,
 			);
 			path = Auth;
@@ -353,6 +356,7 @@
 				5018F9D12508A871009F9979 /* LoginView.swift in Sources */,
 				5018F9D82508A8AE009F9979 /* Coordinator.swift in Sources */,
 				50ADF1AB2501EAE30081BC05 /* RealmService.swift in Sources */,
+				509C4488250CCC55002AE30A /* RecoveryView.swift in Sources */,
 				509C447F250C7895002AE30A /* MainCoordinator.swift in Sources */,
 				50061355250A0C060077AC97 /* SafeView.swift in Sources */,
 			);

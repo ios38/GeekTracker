@@ -17,6 +17,7 @@ class LoginView: UIView {
     var passwordTextField = UITextField()
     let loginButton = UIButton()
     let registerButton = UIButton()
+    let recoveryButton = UIButton()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,7 +31,7 @@ class LoginView: UIView {
     
     func configureSubviews() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = ""
+        titleLabel.text = "GeekTracker"
         titleLabel.textColor = .lightGray
         self.addSubview(titleLabel)
 
@@ -71,6 +72,11 @@ class LoginView: UIView {
         loginButton.accessibilityIdentifier = "userLoginButton"
         self.addSubview(loginButton)
         
+        recoveryButton.translatesAutoresizingMaskIntoConstraints = false
+        recoveryButton.setTitle("Recovery password", for: .normal)
+        recoveryButton.setTitleColor(.systemBlue, for: .normal)
+        self.addSubview(recoveryButton)
+
         registerButton.translatesAutoresizingMaskIntoConstraints = false
         registerButton.setTitle("Register", for: .normal)
         registerButton.setTitleColor(.systemBlue, for: .normal)
@@ -80,7 +86,7 @@ class LoginView: UIView {
     
     func setupConstraints() {
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(100)
+            make.top.equalToSuperview().offset(80)
             make.height.equalTo(50)
             make.centerX.equalToSuperview()
         }
@@ -114,11 +120,16 @@ class LoginView: UIView {
             make.centerX.equalToSuperview()
         }
 
-        registerButton.snp.makeConstraints { make in
+        recoveryButton.snp.makeConstraints { make in
             make.top.equalTo(self.loginButton.snp.bottom).offset(10)
             make.centerX.equalToSuperview()
         }
 
+        registerButton.snp.makeConstraints { make in
+            make.top.equalTo(self.recoveryButton.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+        }
+        
     }
 
 }

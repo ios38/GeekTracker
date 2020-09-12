@@ -7,20 +7,59 @@
 //
 
 import UIKit
+import RealmSwift
 
 final class RecoveryController: UIViewController {
     
-    @IBOutlet weak var loginView: UITextField!
-    
-    @IBAction func recovery(_ sender: Any) {
+    var recoveryView = RecoveryView()
+    var safeView = SafeView()
 
+    let loginError = "User not found!"
+
+    deinit {
+        print("LoginController deinitialized")
+    }
+
+    override func loadView() {
+        super.loadView()
+        self.view = recoveryView
     }
     
-    private func showPassword() {
-        let alert = UIAlertController(title: "Пароль", message: "123", preferredStyle: .alert)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+                
+        recoveryView.recoveryButton.addTarget(self, action: #selector(recoveryButtonAction), for: .touchUpInside)
         
-        let ok = UIAlertAction(title: "OK", style: .cancel)
-        alert.addAction(ok)
-        present(alert, animated: true)
+        NotificationCenter.default.addObserver(self, selector: #selector(enterBackground), name: Notification.Name("enterBackground"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(enterForeground), name: Notification.Name("enterForeground"), object: nil)
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+    }
+
+    @objc func recoveryButtonAction() {
+        //let alert = UIAlertController(title: "Пароль", message: "123", preferredStyle: .alert)
+        //let ok = UIAlertAction(title: "OK", style: .cancel)
+        //alert.addAction(ok)
+        //present(alert, animated: true)
+        
+        guard let login = self.recoveryView.loginTextField.text, login != ""
+              else {
+              recoveryView.titleLabel.text = loginError
+              return
+        }
+        
+        let realmUser: Results<RealmUser> = try! RealmService.get(RealmUser.self).filter("login == %@", login)
+        recoveryView.titleLabel.text = realmUser.count == 0 ? loginError : "Password: \(realmUser.first!.password)"
+    }
+    
+    @objc func enterBackground() {
+        self.view = safeView
+    }
+    
+    @objc func enterForeground() {
+        self.view = recoveryView
+    }
+
 }

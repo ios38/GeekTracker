@@ -22,12 +22,6 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-
-        print("LocationService initialized")
-    }
-    
-    deinit {
-        print("LocationService deinitialized")
     }
     
     func startTracking() {
@@ -47,25 +41,19 @@ class LocationService: NSObject, CLLocationManagerDelegate {
             alert.addAction(okAction)
             UIApplication.shared.windows.filter{$0.isKeyWindow}.first?.rootViewController?.present(alert, animated: true, completion: nil)
         case .authorizedAlways, .authorizedWhenInUse:
-            //locationManager.startUpdatingLocation()
             updateLocationBlock()
-            //print("LocationService started updating location")
         @unknown default:
             return
         }
-        
     }
     
     func stopTracking() {
         self.locationManager.stopUpdatingLocation()
-        //print("LocationService stopped updating location")
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if (status == .authorizedAlways || status == .authorizedWhenInUse) {
-            //locationManager.startUpdatingLocation()
             updateLocationBlock()
-            //print("didChangeAuthorization: LocationService started updating location")
         }
     }
     

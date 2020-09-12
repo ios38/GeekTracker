@@ -39,7 +39,6 @@ class MapView: UIView {
         startButton.setTitleColor(.white, for: .normal)
         //startButton.titleLabel!.font = UIFont.boldSystemFont(ofSize: 16.0)
         startButton.backgroundColor = UIColor(red: 0.0, green: 0.6, blue: 0.0, alpha: 0.9)
-        //startButton.backgroundColor = .black
         startButton.layer.cornerRadius = 15.0
         startButton.accessibilityIdentifier = "startButton"
         self.addSubview(startButton)
@@ -48,7 +47,6 @@ class MapView: UIView {
         stopButton.setTitle("Stop Track", for: .normal)
         stopButton.setTitleColor(.white, for: .normal)
         //stopButton.titleLabel!.font = UIFont.boldSystemFont(ofSize: 16.0)
-        //stopButton.backgroundColor = UIColor(white: 0.1, alpha: 0.9)
         stopButton.backgroundColor = UIColor(red: 0.7, green: 0, blue: 0, alpha: 0.9)
         stopButton.layer.cornerRadius = 15.0
         stopButton.accessibilityIdentifier = "stopButton"
