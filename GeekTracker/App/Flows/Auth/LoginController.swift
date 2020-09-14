@@ -8,6 +8,8 @@
 
 import UIKit
 import RealmSwift
+import RxSwift
+import RxCocoa
 
 final class LoginController: UIViewController {
     var loginView = LoginView()
@@ -33,12 +35,33 @@ final class LoginController: UIViewController {
 
         loginView.passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
+        configureLoginBindings()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(enterBackground), name: Notification.Name("enterBackground"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(enterForeground), name: Notification.Name("enterForeground"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    func configureLoginBindings() {
+        Observable
+            .combineLatest(
+                loginView.loginTextField.rx.text,
+                loginView.passwordTextField.rx.text
+        )
+            .map { login, password in
+                return !(login ?? "").isEmpty && (password ?? "").count >= 3
+        }
+            .bind { [weak loginView] inputFilled in
+                let color: UIColor = inputFilled ? .systemBlue : .systemGray
+                loginView?.loginButton.setTitleColor(color, for: .normal)
+                loginView?.loginButton.isEnabled = inputFilled
+                
+                loginView?.registerButton.setTitleColor(color, for: .normal)
+                loginView?.registerButton.isEnabled = inputFilled
+        }
     }
     
     @objc func loginButtonAction() {

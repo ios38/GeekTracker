@@ -32,10 +32,24 @@ final class RecoveryController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(enterBackground), name: Notification.Name("enterBackground"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(enterForeground), name: Notification.Name("enterForeground"), object: nil)
+        
+        configureLoginBindings()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
+    }
+
+    func configureLoginBindings() {
+        recoveryView.loginTextField.rx.text
+            .map { login in
+                return !(login ?? "").isEmpty
+        }
+            .bind { [weak recoveryView] inputFilled in
+                let color: UIColor = inputFilled ? .systemBlue : .systemGray
+                recoveryView?.recoveryButton.setTitleColor(color, for: .normal)
+                recoveryView?.recoveryButton.isEnabled = inputFilled
+        }
     }
 
     @objc func recoveryButtonAction() {
