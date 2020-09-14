@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreLocation
+import RxSwift
+import RxCocoa
 
 class LocationService: NSObject, CLLocationManagerDelegate {
     static let shared = LocationService()
@@ -15,6 +17,9 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     private var updateLocationBlock: () -> () = { }
     private var updateLocationCount = 0
     private let fakeUpdateLocationCount = 2
+    
+    //let location: Variable<CLLocation?> = Variable(nil)
+    let location: BehaviorRelay<CLLocation?> = BehaviorRelay(value: nil)
 
     override init() {
         super.init()
@@ -45,6 +50,10 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         @unknown default:
             return
         }
+        /*
+        _ = location.subscribe { (event) in
+            print(self.location.value?.coordinate)
+        }*/
     }
     
     func stopTracking() {
@@ -60,9 +69,11 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if updateLocationCount >= fakeUpdateLocationCount {
             guard let location = locations.first else { return }
-            print("\(location.coordinate)")
+            //print("\(location.coordinate)")
             let locationDict:[String: CLLocation] = ["location": location]
             NotificationCenter.default.post(name: NSNotification.Name("LocationServiceDidUpdateCurrentLocation"), object: nil, userInfo: locationDict)
+            
+            self.location.accept(locations.last)
         } else {
             updateLocationCount += 1
         }

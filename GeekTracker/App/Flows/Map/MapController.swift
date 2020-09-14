@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 import RealmSwift
+import RxCocoa
 
 class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate {
     var mapView = MapView()
@@ -18,6 +19,8 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
     
     var onLogout: (() -> Void)?
     var onTracks: (() -> Void)?
+    
+    let locationService = LocationService.shared
 
     override func loadView() {
         super.loadView()
@@ -26,13 +29,32 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        configureLocationService()
         addSavedTracksButton()
         addlogoutButton()
         
         mapView.googleMapView?.delegate = self
         mapView.startButton.addTarget(self, action: #selector(startTrackButtonAction), for: .touchUpInside)
         mapView.stopButton.addTarget(self, action: #selector(stopTrackButtonAction), for: .touchUpInside)
+    }
+    
+    func configureLocationService() {
+        locationService
+            .location
+            .asObservable()
+            .bind { [weak self] location in
+                //print("\(location?.coordinate)")
+                
+                guard let location = location else { return }
+                self?.routePath?.add(location.coordinate)
+                // Обновляем путь у линии маршрута путём повторного присвоения
+                self?.route?.path = self?.routePath
+                
+                // Чтобы наблюдать за движением, установим камеру на только что добавленную точку
+                let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 17)
+                self?.mapView.googleMapView?.animate(to: position)
+        }
     }
     
     func addlogoutButton() {
@@ -52,7 +74,8 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
 
     @objc func savedTracksButtonAction() {
         LocationService.shared.stopTracking()
-        
+        NotificationCenter.default.removeObserver(self)
+
         mapView.startButton.isHidden = false
         mapView.stopButton.isHidden = true
 
@@ -72,7 +95,7 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         track = List<RealmLocation>()
 
         LocationService.shared.startTracking()
-        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateLocation(_:)), name: Notification.Name("LocationServiceDidUpdateCurrentLocation"), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(didUpdateLocation(_:)), name: Notification.Name("LocationServiceDidUpdateCurrentLocation"), object: nil)
         
         mapView.startButton.isHidden = true
         mapView.stopButton.isHidden = false
@@ -122,7 +145,6 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
             route?.path = routePath
         }
     }
-
 }
 
 // MARK: - TracksControllerDelegate
