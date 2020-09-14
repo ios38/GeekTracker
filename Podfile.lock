@@ -9,11 +9,13 @@ PODS:
   - Realm/Headers (5.3.5)
   - RealmSwift (5.3.5):
     - Realm (= 5.3.5)
+  - RxSwift (5.1.1)
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
   - GoogleMaps (~> 3.10.0)
   - RealmSwift (= 5.3.5)
+  - RxSwift
   - SnapKit (~> 5.0.1)
 
 SPEC REPOS:
@@ -21,14 +23,16 @@ SPEC REPOS:
     - GoogleMaps
     - Realm
     - RealmSwift
+    - RxSwift
     - SnapKit
 
 SPEC CHECKSUMS:
   GoogleMaps: 8c080862ff2748ece9929471b30feb56a6c5079d
   Realm: 2b52fcc86fc0ed3d75a56ac0eb1e73c4f1a60e16
   RealmSwift: a6ea2ea561039fc3833c08dec81371a9a3bb5ca6
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: ec5516b2057230e14cd8a722929f10182e698362
+PODFILE CHECKSUM: 54a142915e7bb1fd047ea958a6d01a49ab638e02
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.8.4

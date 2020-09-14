@@ -9,5 +9,7 @@ target 'GeekTracker' do
   pod 'GoogleMaps', '~> 3.10.0'
   pod 'RealmSwift', '5.3.5'
   pod 'SnapKit', '~> 5.0.1'
+  pod 'RxSwift'
+  # pod 'RxCocoa'
   
 end
