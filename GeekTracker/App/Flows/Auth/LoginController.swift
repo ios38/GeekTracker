@@ -46,7 +46,7 @@ final class LoginController: UIViewController {
     }
     
     func configureLoginBindings() {
-        Observable
+        _ = Observable
             .combineLatest(
                 loginView.loginTextField.rx.text,
                 loginView.passwordTextField.rx.text
