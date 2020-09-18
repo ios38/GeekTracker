@@ -8,6 +8,8 @@
 
 import UIKit
 import RealmSwift
+import RxSwift
+import RxCocoa
 
 //protocol TracksControllerDelegate: class {
 //  func tracksControllerDidSelectTrack(_ selectedTrack: RealmTrack)
@@ -19,9 +21,14 @@ class TracksController: UIViewController, UITableViewDataSource, UITableViewDele
     
     private lazy var tracks: Results<RealmTrack> = try! RealmService.get(RealmTrack.self)
     
-    var didSelectTrack: (() -> Void)?
-    var selectedTrack: RealmTrack?
+    //var didSelectTrack: (() -> Void)?
+    //var selectedTrack: RealmTrack?
+    let selectedTrackRx: BehaviorRelay<RealmTrack?> = BehaviorRelay(value: nil)
 
+    //deinit {
+    //    print("TracksController deinit")
+    //}
+    
     override func loadView() {
         super.loadView()
         self.view = tableView
@@ -49,11 +56,11 @@ class TracksController: UIViewController, UITableViewDataSource, UITableViewDele
     //MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.navigationController?.popViewController(animated: true)
-        selectedTrack = tracks[indexPath.row]
         //delegate?.tracksControllerDidSelectTrack(track)
-        didSelectTrack?()
-
+        //selectedTrack = tracks[indexPath.row]
+        selectedTrackRx.accept(tracks[indexPath.row])
+        //didSelectTrack?()
+        self.navigationController?.popViewController(animated: true)
     }
 
 }

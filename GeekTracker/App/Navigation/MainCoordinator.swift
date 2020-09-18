@@ -12,7 +12,7 @@ final class MainCoordinator: Coordinator {
     
     var rootController: UINavigationController?
     var onFinishFlow: (() -> Void)?
-    
+        
     override func start() {
         showMapModule()
     }
@@ -37,12 +37,21 @@ final class MainCoordinator: Coordinator {
     
     private func showTracksModule() {
         let controller = TracksController()
-        
+        /*
         controller.didSelectTrack = { [weak self] in
             guard let track = controller.selectedTrack else { return }
             self?.showSelectedTrack(track)
             self?.rootController?.popViewController(animated: true)
+        }*/
+        
+        controller
+            .selectedTrackRx
+            .asObservable()
+            .bind { [weak self] track in
+            guard let track = track else { return }
+            self?.showSelectedTrack(track)
         }
+
         rootController?.pushViewController(controller, animated: true)
     }
     

@@ -13,7 +13,7 @@ import RxCocoa
 
 final class LoginController: UIViewController {
     var loginView = LoginView()
-    var safeView = SafeView()
+    lazy var safeView = SafeView()
     var onMap: (() -> Void)?
     let loginError = "Login/password error!"
     
