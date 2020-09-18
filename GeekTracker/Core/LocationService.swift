@@ -68,12 +68,12 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if updateLocationCount >= fakeUpdateLocationCount {
-            guard let location = locations.first else { return }
+            //guard let location = locations.first else { return }
             //print("\(location.coordinate)")
-            let locationDict:[String: CLLocation] = ["location": location]
-            NotificationCenter.default.post(name: NSNotification.Name("LocationServiceDidUpdateCurrentLocation"), object: nil, userInfo: locationDict)
+            //let locationDict:[String: CLLocation] = ["location": location]
+            //NotificationCenter.default.post(name: NSNotification.Name("LocationServiceDidUpdateCurrentLocation"), object: nil, userInfo: locationDict)
             
-            self.location.accept(locations.last)
+            self.location.accept(locations.first)
         } else {
             updateLocationCount += 1
         }

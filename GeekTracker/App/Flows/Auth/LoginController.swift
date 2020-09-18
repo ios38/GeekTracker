@@ -13,7 +13,7 @@ import RxCocoa
 
 final class LoginController: UIViewController {
     var loginView = LoginView()
-    var safeView = SafeView()
+    lazy var safeView = SafeView()
     var onMap: (() -> Void)?
     let loginError = "Login/password error!"
     
@@ -46,7 +46,7 @@ final class LoginController: UIViewController {
     }
     
     func configureLoginBindings() {
-        Observable
+        _ = Observable
             .combineLatest(
                 loginView.loginTextField.rx.text,
                 loginView.passwordTextField.rx.text

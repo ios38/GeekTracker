@@ -52,8 +52,14 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
                 self?.route?.path = self?.routePath
                 
                 // Чтобы наблюдать за движением, установим камеру на только что добавленную точку
-                let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 17)
+                let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 15)
                 self?.mapView.googleMapView?.animate(to: position)
+                
+                let realmLocation = RealmLocation()
+                realmLocation.latitude = Double(location.coordinate.latitude)
+                realmLocation.longitude = Double(location.coordinate.longitude)
+                self?.track.append(realmLocation)
+
         }
     }
     
@@ -113,7 +119,7 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         mapView.startButton.isHidden = false
         mapView.stopButton.isHidden = true
     }
-
+    /*
     @objc func didUpdateLocation(_ notification: NSNotification) {
         guard let location = notification.userInfo?["location"] as? CLLocation else { return }
         let cameraPosition = GMSCameraPosition(target: location.coordinate, zoom: 15)
@@ -126,7 +132,7 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         realmLocation.latitude = Double(location.coordinate.latitude)
         realmLocation.longitude = Double(location.coordinate.longitude)
         track.append(realmLocation)
-    }
+    }*/
     
     func showTrack(_ track: RealmTrack) {
         route?.map = nil
