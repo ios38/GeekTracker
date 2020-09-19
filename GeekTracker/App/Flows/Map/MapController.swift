@@ -21,7 +21,8 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
     var onTracks: (() -> Void)?
     
     let locationService = LocationService.shared
-
+    let dateFormatter = DateFormatter()
+    
     override func loadView() {
         super.loadView()
         self.view = mapView
@@ -37,6 +38,10 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         mapView.googleMapView?.delegate = self
         mapView.startButton.addTarget(self, action: #selector(startTrackButtonAction), for: .touchUpInside)
         mapView.stopButton.addTarget(self, action: #selector(stopTrackButtonAction), for: .touchUpInside)
+        
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        dateFormatter.locale = Locale(identifier: "ru_RU")
     }
     
     func configureLocationService() {
@@ -112,7 +117,7 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         NotificationCenter.default.removeObserver(self)
         
         let realmTrack = RealmTrack()
-        realmTrack.date = "\(Date())"
+        realmTrack.date = "\(dateFormatter.string(from: Date()))"
         realmTrack.track = track
         try? RealmService.save(realmTrack)
         
