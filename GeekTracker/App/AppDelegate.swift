@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
         
         UINavigationBar.appearance().backgroundColor = UIColor(white: 0, alpha: 0.95)
-                
+        
         return true
     }
 
