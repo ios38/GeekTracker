@@ -14,9 +14,12 @@ class MapView: UIView {
     var googleMapView: GMSMapView?
     let coordinate = CLLocationCoordinate2D(latitude: 52.287521, longitude: 104.287223)
 
+    var imageView = UIImageView()
+    var pickImageButton = UIButton(type: .system)
+
     var startButton = UIButton(type: .system)
     var stopButton = UIButton(type: .system)
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureSubviews()
@@ -34,6 +37,20 @@ class MapView: UIView {
         googleMapView?.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.googleMapView!)
         
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        //imageView.backgroundColor = .lightGray
+        imageView.layer.cornerRadius = 25
+        imageView.clipsToBounds = true
+        self.addSubview(imageView)
+        
+        pickImageButton.translatesAutoresizingMaskIntoConstraints = false
+        pickImageButton.setTitle("Pick Image", for: .normal)
+        pickImageButton.setTitleColor(.white, for: .normal)
+        pickImageButton.backgroundColor = UIColor(red: 0.0, green: 0.6, blue: 0.0, alpha: 0.9)
+        pickImageButton.layer.cornerRadius = 15.0
+        pickImageButton.accessibilityIdentifier = "Pick Image"
+        self.addSubview(pickImageButton)
+
         startButton.translatesAutoresizingMaskIntoConstraints = false
         startButton.setTitle("Start Track", for: .normal)
         startButton.setTitleColor(.white, for: .normal)
@@ -60,6 +77,12 @@ class MapView: UIView {
             make.size.equalToSuperview()
         }
         
+        imageView.snp.makeConstraints { make in
+            make.height.width.equalTo(50)
+            make.top.equalToSuperview().offset(80)
+            make.left.equalToSuperview().offset(15)
+        }
+
         startButton.snp.makeConstraints { make in
             make.width.equalTo(100)
             make.bottom.equalToSuperview().inset(15)
@@ -70,6 +93,12 @@ class MapView: UIView {
             make.width.equalTo(100)
             make.bottom.equalToSuperview().inset(15)
             make.right.equalToSuperview().inset(15)
+        }
+        
+        pickImageButton.snp.makeConstraints { make in
+            make.width.equalTo(100)
+            make.bottom.equalToSuperview().inset(15)
+            make.centerX.equalToSuperview()
         }
 
     }

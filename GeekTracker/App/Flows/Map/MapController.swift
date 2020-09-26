@@ -16,6 +16,8 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
     var route: GMSPolyline?
     var routePath: GMSMutablePath?
     var track = List<RealmLocation>()
+    var marker: GMSMarker?
+    var markerImage: UIImage?
     
     var onLogout: (() -> Void)?
     var onTracks: (() -> Void)?
@@ -38,7 +40,8 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         mapView.googleMapView?.delegate = self
         mapView.startButton.addTarget(self, action: #selector(startTrackButtonAction), for: .touchUpInside)
         mapView.stopButton.addTarget(self, action: #selector(stopTrackButtonAction), for: .touchUpInside)
-        
+        mapView.pickImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
+
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .short
         dateFormatter.locale = Locale(identifier: "ru_RU")
@@ -52,10 +55,17 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
                 //print("\(location?.coordinate)")
                 
                 guard let location = location else { return }
+
+                //CATransaction.begin()
+                //CATransaction.setAnimationDuration(1.0)
+                self?.marker?.position = location.coordinate
+                //CATransaction.commit()
+
                 self?.routePath?.add(location.coordinate)
                 // Обновляем путь у линии маршрута путём повторного присвоения
                 self?.route?.path = self?.routePath
-                
+
+
                 // Чтобы наблюдать за движением, установим камеру на только что добавленную точку
                 let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 15)
                 self?.mapView.googleMapView?.animate(to: position)
@@ -110,6 +120,8 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
         
         mapView.startButton.isHidden = true
         mapView.stopButton.isHidden = false
+        
+        self.addMarker()
     }
     
     @objc func stopTrackButtonAction() {
@@ -154,6 +166,65 @@ class MapController: UIViewController, GMSMapViewDelegate, CLLocationManagerDele
             
             routePath?.add(realmLocation.coordinate)
             route?.path = routePath
+        }
+    }
+    
+    func addMarker(){
+        let marker = GMSMarker()
+        //let view = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        //view.backgroundColor = .blue
+        //marker.iconView = view
+        let view = MarkerView()
+        view.imageView.image = markerImage
+        marker.iconView = view
+        //marker.icon = GMSMarker.markerImage(with: .blue)
+        //marker.icon = markerImage
+        //marker.title = "\(marker.position.latitude)"
+        //marker.snippet = "\(marker.position.longitude)"
+        marker.map = mapView.googleMapView
+        self.marker = marker
+    }
+    
+    func removeMarker() {
+        marker?.map = nil
+        marker = nil
+    }
+    
+    @objc func pickImage(_ sender: UIButton) {
+        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
+        
+        let pickerController = UIImagePickerController()
+        pickerController.allowsEditing = true
+        pickerController.sourceType = .photoLibrary
+        pickerController.delegate = self
+        
+        present(pickerController, animated: true)
+    }
+
+
+}
+
+extension MapController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image  = extractImage(info: info) {
+            mapView.imageView.image = image
+            self.markerImage = image
+        }
+        
+        picker.dismiss(animated: true)
+    }
+    
+    private func extractImage(info: [UIImagePickerController.InfoKey : Any]) -> UIImage? {
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            return image
+        } else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            return image
+        } else {
+            return nil
         }
     }
 }
